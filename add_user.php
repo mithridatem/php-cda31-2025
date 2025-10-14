@@ -5,26 +5,37 @@ include 'tools.php';
 
 //tester si le formulaire est soumis
 if (isset($_POST["submit"])) {
+    //traitement du formulaire
     $result = add_user();
-
+    //redirection
+    header("Refresh:2; url=add_user.php");
 }
-//fonction pour gérer l'ajout d'un utilisateur (formulaire)
-function add_user() {
+
+/**
+ * Méthode pour gérer l'ajout d'un utilisateur (formulaire)
+ * @return string message de sortie
+ */
+function add_user(): string {
     //Test si les champs sont vides
     if (empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["email"]) || empty($_POST["password"])) {
         return "Veuillez remplir les 4 champs";
     }
 
-    //nettoyer les entrées
+    //Nettoyer les entrées
     foreach ($_POST as $key => $value) {
         $_POST[$key] = sanitize($value);
     }
 
-    //vérifier si l'email est valide
+    //Vérifier si l'email est valide
     if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
         return "L'email n'est pas valide";
     }
 
+    //Test si le compte n'existe pas
+    if (is_user_exists($_POST["email"])) {
+        return "Cet email n'est pas utilisable";
+    }
+    
     //hash du password
     $_POST["password"] = password_hash($_POST["password"], PASSWORD_DEFAULT);
     
