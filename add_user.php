@@ -14,14 +14,14 @@ function add_user() {
     if (empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["email"]) || empty($_POST["password"])) {
         return "Veuillez remplir les 4 champs";
     }
-    
+
     //nettoyer les entrées
     foreach ($_POST as $key => $value) {
         $_POST[$key] = sanitize($value);
     }
 
     //vérifier si l'email est valide
-    if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
         return "L'email n'est pas valide";
     }
 
