@@ -3,11 +3,12 @@
 include 'article_request.php';
 include 'tools.php';
 
+
 //Récupération des catégories
 $categories = get_all_categories();
 //Test si le formulaire est soumis
 if (isset($_POST["submit"])) {
-    dd($_POST);
+    save_article($_POST);
 }
 
 ?>
