@@ -30,3 +30,11 @@ function add_article(array $article) {
         $bdd_article_category->execute();
     }
 }
+
+function get_all_categories() {
+    $sql = "SELECT c.id, c.name_category AS `name` FROM category AS c ORDER BY `name` ASC";
+    $bdd = connectBDD()->prepare($sql);
+    $bdd->execute();
+    $categories = $bdd->fetchAll(PDO::FETCH_ASSOC);
+    return $categories;
+}
