@@ -2,23 +2,28 @@
     include 'vendor/autoload.php';
     include 'tools.php';
     if (isset($_POST["submit"])) {
-        //ancien nom du fichier
-        dd($_FILES["image"]);
+        
+        //ancien nom
         $old_name = $_FILES["image"]["name"];
-        //extension 
-        $ext = getFileExtension($old_name);
+        //extension
+        $ext = strtolower(getFileExtension($old_name));
+        //nouveau nom
         $new_name = uniqid("img", true) . "." . $ext;
-        //dd($old_name, $ext, $new_name);
+        //Vérifier la taille du fichier
         if ($_FILES["image"]["size"] > (100 * 1024 * 1024)) {
             echo "le fichier est trop grand";
-        } else if 
-            ($ext != "png" || $ext != "PNG" || $ext != "jpg" || $ext != "jpeg" || $ext != "JPEG" || $ext != "JPG") {
+        } 
+        //Vérifier si le format
+        else if 
+            ($ext != "png" && $ext != "jpg" && $ext != "jpeg") {
                 echo " le format n'est pas valide"; 
-            }
+        } 
+        //Sinon j'enregistre le fichier
+        else {
+            //Déplacer le fichier
+            move_uploaded_file($_FILES["image"]["tmp_name"], "public/asset/" . $new_name);
         }
-        move_uploaded_file($_FILES["image"]["tmp_name"], "public/asset/" . $_FILES["image"]["name"]);
-       /*  dd($_FILES); */
-
+    }
 ?>
 
 <html lang="en">
