@@ -38,3 +38,4 @@ function get_all_categories() {
     $categories = $bdd->fetchAll(PDO::FETCH_ASSOC);
     return $categories;
 }
+
