@@ -12,7 +12,8 @@ function sanitize(string $value): string
 
 /**
  * Méthode pour sanitize les colonnes d'un tableau
- * @param array $data Tableau 
+ * @param array $data Tableau
+ * @return array tableau nettoyé
  */
 function sanitize_array(array $data): array
 {

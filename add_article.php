@@ -6,9 +6,42 @@ include 'tools.php';
 
 //Récupération des catégories
 $categories = get_all_categories();
+
 //Test si le formulaire est soumis
 if (isset($_POST["submit"])) {
-    save_article($_POST);
+
+    //Traitement du formulaire
+    $message = add_article();
+}
+
+/**
+ * Méthode qui gére le formulaire de d'ajout d'article
+ * @return string retourne le message d'erreur ou de confirmation
+ */
+function add_article(): string
+{
+
+    //tester si les 2 champs ne sont remplis
+    if (empty($_POST["title"]) || empty($_POST["content"])) {
+        return "Veuillez remplir les 2 champs du formulaire";
+    }
+    //nettoyage des données du formulaire ($_POST)
+    foreach ($_POST as $key => $value) {
+        if (gettype($value) == 'string') {
+            $_POST[$key] = sanitize($value);
+        }
+    }
+    //tester si la taille du titre est minimum de 2 caractères
+    if (strlen($_POST["title"]) <= 1) {
+        return "Le titre doit faire au moins 2 caractères de longueur";
+    }
+    try {
+        //Ajout en BDD
+        save_article($_POST);
+        return "L'article " . $_POST["title"] . " à bien été ajouté en BDD";
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
 }
 
 ?>

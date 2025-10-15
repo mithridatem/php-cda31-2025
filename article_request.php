@@ -3,11 +3,6 @@
 include 'database.php';
 
 
-function test() {
-    $bdd = new PDO('mysql:host=localhost;dbname=app', 'root', '');
-    $id = $bdd->lastInsertId();
-    dd($id);
-}
 /**
  * Méthode qui ajoute un article + associe ces catégories en BDD
  * @param array $article super globale $_POST avec les données du formulaire
@@ -30,6 +25,7 @@ function save_article(array $article) {
     //Récupérer l'id de l'article ajouté
     
     $id_article = (int) $pdo->lastInsertId();
+    
     //2 Requêtes pour associer les catégories à l'article
     //Boucle pour associer les catégories à l'article
     foreach($article["categories"] as $category) {
@@ -46,7 +42,6 @@ function save_article(array $article) {
         $bdd_article_category->bindParam(2,$category, PDO::PARAM_INT);
         //Exécuter la requête
         $bdd_article_category->execute();
-
     }
 }
 
