@@ -70,13 +70,13 @@ function add_user(): string
 
 function import_file(): bool|string {
     //Test si l'image existe
-    if (isset($_FILES["img"])) {
+    if (isset($_FILES["img"]["name"]) && !empty($_FILES["img"]["name"])) {
         //ancien nom
-        $old_name = $_FILES["image"]["name"];
+        $old_name = $_FILES["img"]["name"];
         //extension
         $ext = strtolower(getFileExtension($old_name));
         //Test la taille est inférieure à 100K
-        if ($_FILES["image"]["size"] > (100 * 1024 * 1024)) {
+        if ($_FILES["img"]["size"] > (100 * 1024 * 1024)) {
             echo "le fichier est trop grand";
             return false;
         }
@@ -88,7 +88,7 @@ function import_file(): bool|string {
         //nouveau nom
         $new_name = uniqid("img", true) . "." . $ext;
         //Déplacer le fichier
-        move_uploaded_file($_FILES["image"]["tmp_name"], "public/asset/" . $new_name);
+        move_uploaded_file($_FILES["img"]["tmp_name"], "public/asset/" . $new_name);
         return $new_name;
     }
     return false;
