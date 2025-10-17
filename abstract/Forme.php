@@ -17,6 +17,6 @@ abstract class Forme
      * Méthodes concraites
      */
     public function afficher():void {
-        echo "Forme : " . self::class;
+        echo "Forme : " . $this::class;
     }
 }
