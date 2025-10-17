@@ -10,6 +10,7 @@ function sanitize(string $value): string
     return htmlspecialchars(strip_tags(trim($value)), ENT_NOQUOTES);
 }
 
+
 /**
  * Méthode pour sanitize les colonnes d'un tableau
  * @param array $data Tableau
