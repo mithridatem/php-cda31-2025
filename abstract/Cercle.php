@@ -29,4 +29,10 @@ class Cercle extends Forme
     {
         return 2 * pi() * $this->rayon;
     }
+
+    //Redéfinition (logique) @Override
+    public function afficher():void{
+        echo  "Classe de type : " . self::class;
+    }
+
 }
