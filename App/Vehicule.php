@@ -84,7 +84,7 @@ class Vehicule
         if ($this->vitesse > $vehicule->vitesse) {
             return "Le vehicule : " . $this->nom . " est le plus rapide";
         }
-        
+
         //test si le Vehicule en paramètre est le plus rapide
         if ($vehicule->vitesse > $this->vitesse) {
             return "Le vehicule : " . $vehicule->nom . " est le plus rapide";
