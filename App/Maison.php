@@ -4,68 +4,60 @@ namespace App;
 
 class Maison
 {
-    /**
-     * Attributs
-     */
+    //Attributs
     private string $nom;
-    private float $largeur;
     private float $longueur;
+    private float $largeur;
     private int $nbrEtage;
-    /**
-     * Constructeur
-     */
+
+    //Constructeur
     public function __construct(
         string $nom,
-        float $largeur,
         float $longueur,
-        int $nbrEtage = 1
-    )
+        float $largeur,
+        int $nbrEtage = 1,
+        )
     {
         $this->nom = $nom;
-        $this->largeur = $largeur;
         $this->longueur = $longueur;
+        $this->largeur = $largeur;
         $this->nbrEtage = $nbrEtage;
     }
-  
-    /**
-     * Getters et Setters
-     */
-    public function getNom(): string {
+
+    //Getters et Setters
+    public function getNom(): string 
+    {
         return $this->nom;
     }
 
-    public function setNom(string $nom) {
+    public function setNom(string $nom): void
+    {
         $this->nom = $nom;
     }
 
-    public function getLongueur() : float {
+    public function getLongueur(): float 
+    {
         return $this->longueur;
     }
 
-    public function setLongueur(float $longueur) {
-        $this->longueur;
-    }
-
-    public function getNbrEtage() : int {
-        return $this->nbrEtage;
-    }
-
-    public function setNbrEtage(int $nbrEtage) {
-        $this->nbrEtage;
-    }
-
-    /**
-     * Méthodes
-     */
-    public function surface(): float {
-        return $this->longueur * $this->largeur * $this->nbrEtage;
-    }
-
-    public function __toString(): string
+    public function setLongueur(float $longueur): void
     {
-        return "La maison est : " . $this->nom;
+        $this->longueur = $longueur;
     }
 
+    public function getLargeur(): float 
+    {
+        return $this->largeur;
+    }
 
+    public function setLargeur(float $largeur): void 
+    {
+        $this->largeur = $largeur;
+    }
 
+    //Méthodes
+    public function surface(): float 
+    {
+        return $this->largeur * $this->longueur * $this->nbrEtage;
+    }
 }
