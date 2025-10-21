@@ -2,7 +2,6 @@
 
 namespace App\Perso;
 
-
 class Guerrier extends Personnage
 {   
     //Attributs
@@ -35,12 +34,11 @@ class Guerrier extends Personnage
     //Méthode attaquer redéfinie
     public function attaquer(Personnage $cible): void 
     {
-        
+        //Rappeler la logique de attaquer du parent
+        parent::attaquer($cible);
         if ($this->getAttaque() > $cible->getDefense()) {
-            //rappele la logique de attaquer du parent
-            parent::attaquer($cible);
             //Lance mon critique (5%)
-            if ($this->randomFive() <= 5) {
+            if ($this->randomFive() < 5) {
                 //ajout de points de vie attaquant ($this)
                 $this->setVie($this->getVie() + $this->bonusDefense);
             }

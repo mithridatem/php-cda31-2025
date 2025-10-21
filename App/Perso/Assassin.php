@@ -2,7 +2,6 @@
 
 namespace App\Perso;
 
-
 class Assassin extends Personnage
 {   
     //Attributs
@@ -33,14 +32,14 @@ class Assassin extends Personnage
     }
 
     //Méthode attaquer redéfinie
-    public function attaquer(Personnage $cible): void 
-    {
-        
+    public function attaquer(Personnage $cible): void
+    {   
+        //rappeler la logique de attaquer du parent
+        parent::attaquer($cible);
+        //test si la valeur d'attaque courante est supérieure à la défense de la cible
         if ($this->getAttaque() > $cible->getDefense()) {
-            //rappele la logique de attaquer du parent
-            parent::attaquer($cible);
             //Lance mon critique (5%)
-            if ($this->randomFive() <= 5) {
+            if ($this->randomFive() < 5) {
                 //Enlever Bonus attaque
                 $cible->setVie($cible->getVie() - $this->bonusAttaque); 
             }
